@@ -5,7 +5,7 @@ import com.example.BookYourShowApp.BookYourShow.Models.MovieEntity;
 import com.example.BookYourShowApp.BookYourShow.Models.ShowSeatsEntity;
 import com.example.BookYourShowApp.BookYourShow.Models.TheaterEntity;
 import com.example.BookYourShowApp.BookYourShow.Models.TicketEntity;
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

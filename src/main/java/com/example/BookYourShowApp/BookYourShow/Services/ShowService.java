@@ -42,8 +42,12 @@ public class ShowService {
         //set movie and theater for that show
         showEntity.setMovie(movieEntity);
         showEntity.setTheater(theaterEntity);
+
+        //set the foreign key of movieEntity and TheaterEntity
         movieEntity.getShowAll().add(showEntity);
         theaterEntity.getListOfShows().add(showEntity);
+
+        //creating showSeatEntities explicitly
         List<ShowSeatsEntity> showSeatEntity=createShowSeatEntity(theaterEntity.getTheaterSeatEntityList());
         showEntity.setShowSeatsEntityList(showSeatEntity);
 
@@ -52,6 +56,7 @@ public class ShowService {
             showSeatsEntity.setShow(showEntity);
         }
 
+        //It will not create duplicate entries for child coz id is same
         movieRepository.save(movieEntity);
         theaterRepository.save(theaterEntity);
 

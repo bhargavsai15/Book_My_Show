@@ -1,7 +1,7 @@
 package com.example.BookYourShowApp.BookYourShow.RequestDtos;
 
 
-import jakarta.persistence.Column;
+import javax.persistence.*;
 import lombok.Data;
 
 import java.sql.Date;
