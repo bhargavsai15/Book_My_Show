@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
@@ -31,8 +33,11 @@ public class MovieController {
         return new ResponseEntity<>(movie,HttpStatus.FOUND);
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<MovieEntity> getMovieById(@PathVariable("id")Integer id){
-//
-//    }
+    @GetMapping("/all-movies")
+    public ResponseEntity<List<MovieResponseDto>> getAllMovies(){
+        List<MovieResponseDto> movieResponseDtos=movieService.getAllMovies();
+        return new ResponseEntity<>(movieResponseDtos,HttpStatus.FOUND);
+    }
+
+
 }

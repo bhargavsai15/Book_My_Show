@@ -34,9 +34,7 @@ public class TheaterConvertor {
             ShowResponseDto showResponseDto=ShowResponseDto.builder().
                                                 id(showEntity.getId()).
                                                 showDate(showEntity.getShowDate()).
-                                                showTime(showEntity.getShowTime()).
-                                                createdOn(showEntity.getCreatedOn()).
-                                                updatedOn(showEntity.getUpdatedOn()).build();
+                                                showTime(showEntity.getShowTime()).build();
             showResponseDtos.add(showResponseDto);
         }
 

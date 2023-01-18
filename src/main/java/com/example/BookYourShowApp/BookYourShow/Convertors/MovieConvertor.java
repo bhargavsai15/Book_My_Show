@@ -36,17 +36,44 @@ public class MovieConvertor {
 
         List<ShowResponseDto> showEntityList=new ArrayList<>();
         for(ShowEntity showEntities:movie.getShowAll()){
+
             ShowResponseDto showResponseDto=ShowResponseDto.builder().
                                                 id(showEntities.getId()).
                                                 showTime(showEntities.getShowTime()).
-                                                showDate(showEntities.getShowDate()).
-                                                updatedOn(showEntities.getUpdatedOn()).
-                                                createdOn(showEntities.getCreatedOn()).build();
+                                                showDate(showEntities.getShowDate()).build();
             showEntityList.add(showResponseDto);
         }
 
         movieResponseDto.setShowAll(showEntityList);
 
         return movieResponseDto;
+    }
+
+    public static List<MovieResponseDto> convertMovieEntityToResponseDto(List<MovieEntity> movieEntityList){
+
+        List<MovieResponseDto> movieResponseDtoList=new ArrayList<>();
+
+
+        for(MovieEntity movie:movieEntityList){
+            MovieResponseDto movieResponseDto=MovieResponseDto.builder().
+                                                    id(movie.getId()).
+                                                    movieName(movie.getMovieName()).
+                                                    duration(movie.getDuration()).
+                                                    releaseDate(movie.getReleaseDate()).build();
+
+            List<ShowResponseDto> showEntityList=new ArrayList<>();
+            for(ShowEntity showEntities:movie.getShowAll()){
+
+                ShowResponseDto showResponseDto=ShowResponseDto.builder().
+                        id(showEntities.getId()).
+                        showTime(showEntities.getShowTime()).
+                        showDate(showEntities.getShowDate()).build();
+                showEntityList.add(showResponseDto);
+            }
+            movieResponseDto.setShowAll(showEntityList);
+            movieResponseDtoList.add(movieResponseDto);
+        }
+
+        return movieResponseDtoList;
     }
 }

@@ -28,7 +28,4 @@ public class ShowResponseDto {
 
     private LocalTime showTime;
 
-    private Date createdOn;
-
-    private Date updatedOn;
 }

@@ -12,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class MovieService {
@@ -40,6 +42,12 @@ public class MovieService {
             log.info("Movie not found Error");
             return null;
         }
+    }
+
+    public List<MovieResponseDto> getAllMovies(){
+        List<MovieEntity> movieEntityList=movieRepository.findAll();
+        List<MovieResponseDto> movieResponseDtoList=MovieConvertor.convertMovieEntityToResponseDto(movieEntityList);
+        return movieResponseDtoList;
     }
 
 

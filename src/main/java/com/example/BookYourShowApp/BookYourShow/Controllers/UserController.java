@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.file.Path;
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -30,5 +31,11 @@ public class UserController {
     public ResponseEntity<UserEntity> getUserByName(@PathVariable("name")String name){
         UserEntity user=userService.getUserByName(name);
         return new ResponseEntity<>(user,HttpStatus.CREATED);
+    }
+
+    @GetMapping("/all-users")
+    public ResponseEntity<List<UserEntity>> getAllUsers(){
+        List<UserEntity> userEntityList=userService.getAllUsers();
+        return new ResponseEntity<>(userEntityList,HttpStatus.FOUND);
     }
 }
