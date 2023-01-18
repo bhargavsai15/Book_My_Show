@@ -18,12 +18,14 @@ public class UserController {
     UserService userService;
 
 
+    //Post user data
     @PostMapping("/create")
     public ResponseEntity<String> createUser(@RequestBody() UserRequestDto userRequestDto){
         String response=userService.createUser(userRequestDto);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
+    //Get user by name
     @GetMapping("/{name}")
     public ResponseEntity<UserEntity> getUserByName(@PathVariable("name")String name){
         UserEntity user=userService.getUserByName(name);

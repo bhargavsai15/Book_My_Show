@@ -1,6 +1,8 @@
 package com.example.BookYourShowApp.BookYourShow.Models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,6 +17,8 @@ import java.util.List;
 @Table(name = "shows")
 @Data
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class ShowEntity {
 
     @Id
@@ -24,6 +28,8 @@ public class ShowEntity {
     private LocalDate showDate;
 
     private LocalTime showTime;
+
+    private double multiplier;
 
     @CreationTimestamp
     @Temporal(value = TemporalType.TIMESTAMP)

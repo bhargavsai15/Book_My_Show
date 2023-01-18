@@ -2,9 +2,7 @@ package com.example.BookYourShowApp.BookYourShow.Models;
 
 import com.example.BookYourShowApp.BookYourShow.Enums.SeatType;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Generated;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
@@ -12,6 +10,8 @@ import java.util.Date;
 @Table(name="show_seats")
 @Data
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class ShowSeatsEntity {
 
     @Id

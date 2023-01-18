@@ -1,7 +1,10 @@
 package com.example.BookYourShowApp.BookYourShow.Controllers;
 
 
+import com.example.BookYourShowApp.BookYourShow.Convertors.MovieConvertor;
+import com.example.BookYourShowApp.BookYourShow.Models.MovieEntity;
 import com.example.BookYourShowApp.BookYourShow.RequestDtos.MovieRequestDto;
+import com.example.BookYourShowApp.BookYourShow.ResponseDtos.MovieResponseDto;
 import com.example.BookYourShowApp.BookYourShow.Services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +25,14 @@ public class MovieController {
     }
 
     //Get movie by name
-//    @GetMapping("/{name}")
-//    public
+    @GetMapping("/{name}")
+    public ResponseEntity<MovieResponseDto> getMovieByName(@PathVariable("name")String name){
+        MovieResponseDto movie=movieService.getMovieByName(name);
+        return new ResponseEntity<>(movie,HttpStatus.FOUND);
+    }
+
+//    @GetMapping("/{id}")
+//    public ResponseEntity<MovieEntity> getMovieById(@PathVariable("id")Integer id){
+//
+//    }
 }
