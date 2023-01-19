@@ -8,11 +8,15 @@ import com.example.BookYourShowApp.BookYourShow.Repositories.ShowRepository;
 import com.example.BookYourShowApp.BookYourShow.Repositories.TheaterRepository;
 import com.example.BookYourShowApp.BookYourShow.RequestDtos.ShowRequestDto;
 import com.example.BookYourShowApp.BookYourShow.RequestDtos.ShowSeatsRepository;
+import com.example.BookYourShowApp.BookYourShow.ResponseDtos.ShowResponseDto;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -75,5 +79,29 @@ public class ShowService {
 
         showSeatsRepository.saveAll(showSeats);
         return showSeats;
+    }
+
+    public List<ShowResponseDto> getAllShowsByGivenTime(String time1, String time2){
+        LocalTime t1 = LocalTime.parse(time1);
+        LocalTime t2=LocalTime.parse(time2);
+
+        List<ShowEntity> showEntities=showRepository.findAll();
+        List<ShowResponseDto> showResponseDtoList=new ArrayList<>();
+
+        for(ShowEntity show:showEntities){
+            String str= String.valueOf(show.getShowTime());
+            LocalTime t3=LocalTime.parse(str);
+
+            if(t3.compareTo(t1)>0 && t3.compareTo(t2)<0){
+                ShowResponseDto showResponseDto=ShowResponseDto.builder().
+                        id(show.getId()).
+                        showDate(show.getShowDate()).
+                        showTime(show.getShowTime()).build();
+
+                showResponseDtoList.add(showResponseDto);
+            }
+//            System.out.println(show.getShowTime());
+        }
+        return showResponseDtoList;
     }
 }

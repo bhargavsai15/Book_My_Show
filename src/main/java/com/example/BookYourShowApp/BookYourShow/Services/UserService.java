@@ -5,6 +5,7 @@ import com.example.BookYourShowApp.BookYourShow.Convertors.UserConvertor;
 import com.example.BookYourShowApp.BookYourShow.Models.UserEntity;
 import com.example.BookYourShowApp.BookYourShow.Repositories.UserRepository;
 import com.example.BookYourShowApp.BookYourShow.RequestDtos.UserRequestDto;
+import com.example.BookYourShowApp.BookYourShow.ResponseDtos.UserResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,15 +30,15 @@ public class UserService {
         return "User added successfully";
     }
 
-    public UserEntity getUserByName(String name){
-        UserEntity user=null;
+    public UserResponseDto getUserByName(String name){
         try{
-            user=userRepository.findByName(name);
-        }catch (Exception e){
+            UserEntity user=userRepository.findByName(name);
+            UserResponseDto userResponseDto=UserConvertor.convertResponseDtoToEntity(user);
+            return userResponseDto;
+        }catch (Exception e) {
             log.info("User not found");
             return null;
         }
-        return user;
     }
 
     public List<UserEntity> getAllUsers(){

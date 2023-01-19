@@ -2,13 +2,13 @@ package com.example.BookYourShowApp.BookYourShow.Controllers;
 
 import com.example.BookYourShowApp.BookYourShow.Models.UserEntity;
 import com.example.BookYourShowApp.BookYourShow.RequestDtos.UserRequestDto;
+import com.example.BookYourShowApp.BookYourShow.ResponseDtos.UserResponseDto;
 import com.example.BookYourShowApp.BookYourShow.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.file.Path;
 import java.util.List;
 
 @RestController
@@ -26,12 +26,14 @@ public class UserController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    //Get user by name
+    //Get user by name and also the list of booked tickets
     @GetMapping("/{name}")
-    public ResponseEntity<UserEntity> getUserByName(@PathVariable("name")String name){
-        UserEntity user=userService.getUserByName(name);
-        return new ResponseEntity<>(user,HttpStatus.CREATED);
+    public ResponseEntity<UserResponseDto> getUserByName(@PathVariable("name")String name){
+        UserResponseDto userResponseDto=userService.getUserByName(name);
+        return new ResponseEntity<>(userResponseDto,HttpStatus.CREATED);
     }
+
+
 
     @GetMapping("/all-users")
     public ResponseEntity<List<UserEntity>> getAllUsers(){
