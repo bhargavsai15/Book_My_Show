@@ -1,4 +1,6 @@
 package com.example.BookYourShowApp.BookYourShow.Models;
+import lombok.Data;
+
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
@@ -7,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name="Tickets")
+@Data
 public class TicketEntity {
 
     @Id
