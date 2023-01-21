@@ -85,22 +85,17 @@ public class ShowService {
         LocalTime t1 = LocalTime.parse(time1);
         LocalTime t2=LocalTime.parse(time2);
 
-        List<ShowEntity> showEntities=showRepository.findAll();
+        List<ShowEntity> showEntities=showRepository.findByShowTimeBetween(t1,t2);
         List<ShowResponseDto> showResponseDtoList=new ArrayList<>();
 
         for(ShowEntity show:showEntities){
-            String str= String.valueOf(show.getShowTime());
-            LocalTime t3=LocalTime.parse(str);
+            ShowResponseDto showResponseDto=ShowResponseDto.builder().
+                                                id(show.getId()).
+                                                showDate(show.getShowDate()).
+                                                showTime(show.getShowTime()).build();
 
-            if(t3.compareTo(t1)>0 && t3.compareTo(t2)<0){
-                ShowResponseDto showResponseDto=ShowResponseDto.builder().
-                        id(show.getId()).
-                        showDate(show.getShowDate()).
-                        showTime(show.getShowTime()).build();
+            showResponseDtoList.add(showResponseDto);
 
-                showResponseDtoList.add(showResponseDto);
-            }
-//            System.out.println(show.getShowTime());
         }
         return showResponseDtoList;
     }

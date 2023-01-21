@@ -11,5 +11,5 @@ import java.util.List;
 
 @Repository
 public interface ShowRepository extends JpaRepository<ShowEntity,Integer> {
-//    List<ShowEntity> findByShowTimeBetween(LocalTime time1,LocalTime time2);
+    List<ShowEntity> findByShowTimeBetween(LocalTime time1,LocalTime time2);
 }

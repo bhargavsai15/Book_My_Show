@@ -7,9 +7,8 @@ import lombok.Data;
 import java.sql.Date;
 
 @Data
-public class MovieRequestDto {
+public class MovieRequestDto{
 
-    @Column(nullable = false)
     private String movieName;
 
     private Date releaseDate;

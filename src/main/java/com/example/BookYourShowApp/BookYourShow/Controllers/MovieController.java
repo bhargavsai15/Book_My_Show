@@ -5,6 +5,7 @@ import com.example.BookYourShowApp.BookYourShow.Convertors.MovieConvertor;
 import com.example.BookYourShowApp.BookYourShow.Models.MovieEntity;
 import com.example.BookYourShowApp.BookYourShow.RequestDtos.MovieRequestDto;
 import com.example.BookYourShowApp.BookYourShow.ResponseDtos.MovieResponseDto;
+import com.example.BookYourShowApp.BookYourShow.ResponseDtos.TheaterResponseDto;
 import com.example.BookYourShowApp.BookYourShow.Services.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,9 +29,9 @@ public class MovieController {
 
     //Get movie by name
     @GetMapping("/{name}")
-    public ResponseEntity<MovieResponseDto> getMovieByName(@PathVariable("name")String name){
-        MovieResponseDto movie=movieService.getMovieByName(name);
-        return new ResponseEntity<>(movie,HttpStatus.FOUND);
+    public ResponseEntity<List<MovieResponseDto>> getMovieByName(@PathVariable("name")String name){
+        List<MovieResponseDto> movieResponseDtoList=movieService.getMovieByName(name);
+        return new ResponseEntity<>(movieResponseDtoList,HttpStatus.FOUND);
     }
 
     @GetMapping("/all-movies")
@@ -39,5 +40,9 @@ public class MovieController {
         return new ResponseEntity<>(movieResponseDtos,HttpStatus.FOUND);
     }
 
-
+    @GetMapping("/theater/{name}")
+    public ResponseEntity<List<TheaterResponseDto>> getAllTheatersByMovieName(@PathVariable("name")String name){
+        List<TheaterResponseDto> theaterResponseDtos=movieService.getAllTheatersByMovieName(name);
+        return new ResponseEntity<>(theaterResponseDtos,HttpStatus.FOUND);
+    }
 }

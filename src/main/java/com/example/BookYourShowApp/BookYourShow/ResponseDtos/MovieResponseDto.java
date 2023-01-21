@@ -18,6 +18,7 @@ public class MovieResponseDto {
 
     private int duration;
 
+    @Column(unique = true)
     private String movieName;
 
     private Date releaseDate;

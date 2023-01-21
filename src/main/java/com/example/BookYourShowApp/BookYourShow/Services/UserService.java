@@ -41,10 +41,11 @@ public class UserService {
         }
     }
 
-    public List<UserEntity> getAllUsers(){
+    public List<UserResponseDto> getAllUsers(){
         try {
             List<UserEntity> userEntities = userRepository.findAll();
-            return userEntities;
+            List<UserResponseDto> userResponseDtos=UserConvertor.convertUserRequestToEntity(userEntities);
+            return userResponseDtos;
         }catch (Exception e){
             return null;
         }

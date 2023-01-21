@@ -8,10 +8,12 @@ import com.example.BookYourShowApp.BookYourShow.Repositories.MovieRepository;
 import com.example.BookYourShowApp.BookYourShow.RequestDtos.MovieRequestDto;
 import com.example.BookYourShowApp.BookYourShow.RequestDtos.ShowRequestDto;
 import com.example.BookYourShowApp.BookYourShow.ResponseDtos.MovieResponseDto;
+import com.example.BookYourShowApp.BookYourShow.ResponseDtos.TheaterResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -33,9 +35,9 @@ public class MovieService {
         return "Movie added successfully ";
     }
 
-    public MovieResponseDto getMovieByName(String name){
-        MovieEntity movie=movieRepository.findByMovieName(name);
-        MovieResponseDto movieResponseDto= MovieConvertor.convertDtoToEntity(movie);
+    public List<MovieResponseDto> getMovieByName(String name){
+        List<MovieEntity> movie=movieRepository.findAllByMovieName(name);
+        List<MovieResponseDto> movieResponseDto= MovieConvertor.convertDtoToEntity(movie);
         try{
             return movieResponseDto;
         }catch (Exception e){
@@ -48,6 +50,17 @@ public class MovieService {
         List<MovieEntity> movieEntityList=movieRepository.findAll();
         List<MovieResponseDto> movieResponseDtoList=MovieConvertor.convertMovieEntityToResponseDto(movieEntityList);
         return movieResponseDtoList;
+    }
+
+    public List<TheaterResponseDto> getAllTheatersByMovieName(String name){
+        List<MovieEntity> movieEntityList=movieRepository.findAllByMovieName(name);
+        List<TheaterResponseDto> theaterResponseDtos=new ArrayList<>();
+
+        for(MovieEntity movie:movieEntityList){
+            System.out.println(movie.getMovieName());
+        }
+
+        return theaterResponseDtos;
     }
 
 
