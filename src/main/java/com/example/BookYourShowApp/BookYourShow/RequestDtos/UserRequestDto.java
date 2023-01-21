@@ -11,6 +11,6 @@ public class UserRequestDto {
 
     private String mobile;
 
-    private List<TicketEntity> listOfTickets;
+//    private List<TicketEntity> listOfTickets;
 
 }

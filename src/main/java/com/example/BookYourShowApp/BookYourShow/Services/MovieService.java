@@ -37,7 +37,7 @@ public class MovieService {
 
     public List<MovieResponseDto> getMovieByName(String name){
         List<MovieEntity> movie=movieRepository.findAllByMovieName(name);
-        List<MovieResponseDto> movieResponseDto= MovieConvertor.convertDtoToEntity(movie);
+        List<MovieResponseDto> movieResponseDto= MovieConvertor.convertListOfMovieEntityToResponseDto(movie);
         try{
             return movieResponseDto;
         }catch (Exception e){
@@ -48,12 +48,13 @@ public class MovieService {
 
     public List<MovieResponseDto> getAllMovies(){
         List<MovieEntity> movieEntityList=movieRepository.findAll();
-        List<MovieResponseDto> movieResponseDtoList=MovieConvertor.convertMovieEntityToResponseDto(movieEntityList);
+        List<MovieResponseDto> movieResponseDtoList=MovieConvertor.convertListOfMovieEntityToResponseDto(movieEntityList);
         return movieResponseDtoList;
     }
 
     public List<TheaterResponseDto> getAllTheatersByMovieName(String name){
         List<MovieEntity> movieEntityList=movieRepository.findAllByMovieName(name);
+
         List<TheaterResponseDto> theaterResponseDtos=new ArrayList<>();
 
         for(MovieEntity movie:movieEntityList){

@@ -27,7 +27,7 @@ public class MovieConvertor {
         return movie;
     }
 
-    public static List<MovieResponseDto> convertDtoToEntity(List<MovieEntity> movie){
+    public static List<MovieResponseDto> convertListOfMovieEntityToResponseDto(List<MovieEntity> movie){
         List<MovieResponseDto> movieResponseDtos=new ArrayList<>();
 
         for(MovieEntity movies:movie){
@@ -56,31 +56,31 @@ public class MovieConvertor {
         return movieResponseDtos;
     }
 
-    public static List<MovieResponseDto> convertMovieEntityToResponseDto(List<MovieEntity> movieEntityList){
-
-        List<MovieResponseDto> movieResponseDtoList=new ArrayList<>();
-
-
-        for(MovieEntity movie:movieEntityList){
-            MovieResponseDto movieResponseDto=MovieResponseDto.builder().
-                                                    id(movie.getId()).
-                                                    movieName(movie.getMovieName()).
-                                                    duration(movie.getDuration()).
-                                                    releaseDate(movie.getReleaseDate()).build();
-
-            List<ShowResponseDto> showEntityList=new ArrayList<>();
-            for(ShowEntity showEntities:movie.getShowAll()){
-
-                ShowResponseDto showResponseDto=ShowResponseDto.builder().
-                        id(showEntities.getId()).
-                        showTime(showEntities.getShowTime()).
-                        showDate(showEntities.getShowDate()).build();
-                showEntityList.add(showResponseDto);
-            }
-            movieResponseDto.setShowAll(showEntityList);
-            movieResponseDtoList.add(movieResponseDto);
-        }
-
-        return movieResponseDtoList;
-    }
+//    public static List<MovieResponseDto> convertMovieEntityToResponseDto(List<MovieEntity> movieEntityList){
+//
+//        List<MovieResponseDto> movieResponseDtoList=new ArrayList<>();
+//
+//
+//        for(MovieEntity movie:movieEntityList){
+//            MovieResponseDto movieResponseDto=MovieResponseDto.builder().
+//                                                    id(movie.getId()).
+//                                                    movieName(movie.getMovieName()).
+//                                                    duration(movie.getDuration()).
+//                                                    releaseDate(movie.getReleaseDate()).build();
+//
+//            List<ShowResponseDto> showEntityList=new ArrayList<>();
+//            for(ShowEntity showEntities:movie.getShowAll()){
+//
+//                ShowResponseDto showResponseDto=ShowResponseDto.builder().
+//                        id(showEntities.getId()).
+//                        showTime(showEntities.getShowTime()).
+//                        showDate(showEntities.getShowDate()).build();
+//                showEntityList.add(showResponseDto);
+//            }
+//            movieResponseDto.setShowAll(showEntityList);
+//            movieResponseDtoList.add(movieResponseDto);
+//        }
+//
+//        return movieResponseDtoList;
+//    }
 }

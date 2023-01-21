@@ -33,7 +33,7 @@ public class UserService {
     public UserResponseDto getUserByName(String name){
         try{
             UserEntity user=userRepository.findByName(name);
-            UserResponseDto userResponseDto=UserConvertor.convertResponseDtoToEntity(user);
+            UserResponseDto userResponseDto=UserConvertor.convertUserEntityToResponseDto(user);
             return userResponseDto;
         }catch (Exception e) {
             log.info("User not found");
@@ -44,7 +44,7 @@ public class UserService {
     public List<UserResponseDto> getAllUsers(){
         try {
             List<UserEntity> userEntities = userRepository.findAll();
-            List<UserResponseDto> userResponseDtos=UserConvertor.convertUserRequestToEntity(userEntities);
+            List<UserResponseDto> userResponseDtos=UserConvertor.convertListOfUserEntityToResponseDto(userEntities);
             return userResponseDtos;
         }catch (Exception e){
             return null;

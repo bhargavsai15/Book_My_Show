@@ -17,6 +17,6 @@ public class UserResponseDto {
 
     private String mobile;
 
-    private List<TicketResponseDto> listOfTickets;
+//    private List<TicketResponseDto> listOfTickets;
 
 }
