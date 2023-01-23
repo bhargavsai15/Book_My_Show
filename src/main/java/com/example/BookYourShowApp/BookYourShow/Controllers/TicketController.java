@@ -1,7 +1,9 @@
 package com.example.BookYourShowApp.BookYourShow.Controllers;
 
 import com.example.BookYourShowApp.BookYourShow.RequestDtos.TicketRequestDto;
+import com.example.BookYourShowApp.BookYourShow.ResponseDtos.TheaterResponseDto;
 import com.example.BookYourShowApp.BookYourShow.ResponseDtos.TicketResponseDto;
+import com.example.BookYourShowApp.BookYourShow.ResponseDtos.TicketResponseDto1;
 import com.example.BookYourShowApp.BookYourShow.Services.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,8 +37,12 @@ public class TicketController {
     }
 //
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteTicket(@PathVariable("id")Integer id){
-        String response=ticketService.deleteTicket(id);
-        return new ResponseEntity<>(response,HttpStatus.GONE);
+    public ResponseEntity<TicketResponseDto1> deleteTicket(@PathVariable("id")Integer id){
+        TicketResponseDto1 ticket=ticketService.deleteTicket(id);
+        return new ResponseEntity<>(ticket,HttpStatus.GONE);
     }
+
+
 }
+
+

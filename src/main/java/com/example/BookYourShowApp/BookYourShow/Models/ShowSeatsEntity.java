@@ -1,7 +1,8 @@
 package com.example.BookYourShowApp.BookYourShow.Models;
 
 import com.example.BookYourShowApp.BookYourShow.Enums.SeatType;
-import javax.persistence.*;
+
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;

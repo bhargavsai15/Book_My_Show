@@ -2,14 +2,12 @@ package com.example.BookYourShowApp.BookYourShow.Convertors;
 
 import com.example.BookYourShowApp.BookYourShow.Models.MovieEntity;
 import com.example.BookYourShowApp.BookYourShow.Models.ShowEntity;
-import com.example.BookYourShowApp.BookYourShow.Repositories.ShowRepository;
+import com.example.BookYourShowApp.BookYourShow.Models.TheaterEntity;
 import com.example.BookYourShowApp.BookYourShow.RequestDtos.MovieRequestDto;
 import com.example.BookYourShowApp.BookYourShow.ResponseDtos.MovieResponseDto;
 import com.example.BookYourShowApp.BookYourShow.ResponseDtos.ShowResponseDto;
-import lombok.AllArgsConstructor;
+import com.example.BookYourShowApp.BookYourShow.ResponseDtos.TheaterResponseDto1;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,31 +54,29 @@ public class MovieConvertor {
         return movieResponseDtos;
     }
 
-//    public static List<MovieResponseDto> convertMovieEntityToResponseDto(List<MovieEntity> movieEntityList){
-//
-//        List<MovieResponseDto> movieResponseDtoList=new ArrayList<>();
-//
-//
-//        for(MovieEntity movie:movieEntityList){
-//            MovieResponseDto movieResponseDto=MovieResponseDto.builder().
-//                                                    id(movie.getId()).
-//                                                    movieName(movie.getMovieName()).
-//                                                    duration(movie.getDuration()).
-//                                                    releaseDate(movie.getReleaseDate()).build();
-//
-//            List<ShowResponseDto> showEntityList=new ArrayList<>();
-//            for(ShowEntity showEntities:movie.getShowAll()){
-//
-//                ShowResponseDto showResponseDto=ShowResponseDto.builder().
-//                        id(showEntities.getId()).
-//                        showTime(showEntities.getShowTime()).
-//                        showDate(showEntities.getShowDate()).build();
-//                showEntityList.add(showResponseDto);
-//            }
-//            movieResponseDto.setShowAll(showEntityList);
-//            movieResponseDtoList.add(movieResponseDto);
-//        }
-//
-//        return movieResponseDtoList;
-//    }
+    public static List<TheaterResponseDto1> convertListOfMovieEntityToTheaterResponseDto(List<MovieEntity> movies){
+        List<TheaterResponseDto1> theaterResponseDto1s=new ArrayList<>();
+        for(MovieEntity movie:movies){
+
+
+            //Get All Shows for that movie
+            List<ShowEntity> shows=movie.getShowAll();
+
+            //From movie entity we are accessing the theater name
+            for (ShowEntity show:shows){
+
+                TheaterEntity theater=show.getTheater();
+
+                //Converting into Theater Response DTO
+                TheaterResponseDto1 theaterResponseDto1= TheaterResponseDto1.builder().
+                                                            id(theater.getId()).
+                                                            name(theater.getName()).
+                                                            city(theater.getCity()).
+                                                            address(theater.getAddress()).build();
+                theaterResponseDto1s.add(theaterResponseDto1);
+            }
+
+        }
+        return theaterResponseDto1s;
+    }
 }

@@ -1,7 +1,7 @@
 package com.example.BookYourShowApp.BookYourShow.Models;
 
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

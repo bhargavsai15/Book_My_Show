@@ -1,7 +1,8 @@
 package com.example.BookYourShowApp.BookYourShow.ResponseDtos;
 
 import com.example.BookYourShowApp.BookYourShow.Models.ShowEntity;
-import javax.persistence.*;
+
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

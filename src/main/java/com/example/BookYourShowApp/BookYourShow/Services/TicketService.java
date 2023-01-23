@@ -8,8 +8,11 @@ import com.example.BookYourShowApp.BookYourShow.Models.UserEntity;
 import com.example.BookYourShowApp.BookYourShow.Repositories.ShowRepository;
 import com.example.BookYourShowApp.BookYourShow.Repositories.TicketRepository;
 import com.example.BookYourShowApp.BookYourShow.Repositories.UserRepository;
+import com.example.BookYourShowApp.BookYourShow.RequestDtos.TheaterRequestDto;
 import com.example.BookYourShowApp.BookYourShow.RequestDtos.TicketRequestDto;
+import com.example.BookYourShowApp.BookYourShow.ResponseDtos.TheaterResponseDto;
 import com.example.BookYourShowApp.BookYourShow.ResponseDtos.TicketResponseDto;
+import com.example.BookYourShowApp.BookYourShow.ResponseDtos.TicketResponseDto1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -108,16 +111,23 @@ public class TicketService {
         return ticketResponseDtoList;
     }
 
-    public String deleteTicket(int id){
+    public TicketResponseDto1 deleteTicket(int id){
 
+        TicketResponseDto1 ticketResponseDto1=new TicketResponseDto1();
+        double cancle_fee=20; //20% of money will be deduced
+        int totalAmount=0;
+        boolean deleted=false;
         TicketEntity ticket=ticketRepository.findById(id).get();
 
+        //Get all user booked ticket list
         UserEntity user=ticket.getUser();
         List<TicketEntity> ticketEntities=user.getListOfTickets();
 
+        //get all shows list for that ticket
         ShowEntity show=ticket.getShow();
         List<TicketEntity> ticketEntities1=show.getListOfBookedTickets();
 
+        //get all booked seats
         List<ShowSeatsEntity> showSeatsEntities=show.getShowSeatsEntityList();
 
         for(ShowSeatsEntity showSeats:showSeatsEntities){
@@ -126,13 +136,23 @@ public class TicketService {
                 showSeats.setBooked(false);
                 showSeats.setBookAt(null);
                 showSeats.setTicket(null);
+                totalAmount+=ticket1.getAmount();
                 ticketEntities.remove(ticket1);
                 ticketEntities1.remove(ticket1);
+                deleted=true;
             }
         }
 
         ticketRepository.deleteById(id);
-
-        return "deleted";
+        if(deleted){
+            double refund= ((cancle_fee/100)*totalAmount);
+            ticketResponseDto1.setMessage("Ticket Deleted Successfully");
+            ticketResponseDto1.setRefunded_amount(refund);
+        }else {
+            ticketResponseDto1.setMessage("No tickets are booked");
+        }
+        return ticketResponseDto1;
     }
+
+
 }

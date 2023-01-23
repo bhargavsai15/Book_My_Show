@@ -13,7 +13,7 @@ public class ShowRequestDto {
 
     private LocalTime showTime;
 
-    private String movieName;
+    private int movieId;
 
     private int theaterId;
 

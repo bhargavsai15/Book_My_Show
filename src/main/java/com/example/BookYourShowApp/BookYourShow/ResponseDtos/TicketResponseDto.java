@@ -7,10 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.CascadeType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +25,15 @@ public class TicketResponseDto {
 
     private Date bookedAt;
 
-    private UserEntity user;
+    private int userId;
 
-    private ShowEntity show;
+    private String userName;
+
+    private int showId;
+
+    private LocalDate showDate;
+
+    private LocalTime showTime;
+
+    private String movieName;
 }

@@ -5,7 +5,7 @@ import com.example.BookYourShowApp.BookYourShow.Models.MovieEntity;
 import com.example.BookYourShowApp.BookYourShow.Models.ShowSeatsEntity;
 import com.example.BookYourShowApp.BookYourShow.Models.TheaterEntity;
 import com.example.BookYourShowApp.BookYourShow.Models.TicketEntity;
-import javax.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,5 +27,13 @@ public class ShowResponseDto {
     private LocalDate showDate;
 
     private LocalTime showTime;
+
+    private int movieId;
+
+    private String movieName;
+
+    private int theaterId;
+
+    private String theaterName;
 
 }

@@ -1,19 +1,15 @@
 package com.example.BookYourShowApp.BookYourShow.Services;
 
 import com.example.BookYourShowApp.BookYourShow.Convertors.MovieConvertor;
-import com.example.BookYourShowApp.BookYourShow.Convertors.ShowConvertor;
 import com.example.BookYourShowApp.BookYourShow.Models.MovieEntity;
-import com.example.BookYourShowApp.BookYourShow.Models.ShowEntity;
 import com.example.BookYourShowApp.BookYourShow.Repositories.MovieRepository;
 import com.example.BookYourShowApp.BookYourShow.RequestDtos.MovieRequestDto;
-import com.example.BookYourShowApp.BookYourShow.RequestDtos.ShowRequestDto;
 import com.example.BookYourShowApp.BookYourShow.ResponseDtos.MovieResponseDto;
-import com.example.BookYourShowApp.BookYourShow.ResponseDtos.TheaterResponseDto;
+import com.example.BookYourShowApp.BookYourShow.ResponseDtos.TheaterResponseDto1;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -52,16 +48,15 @@ public class MovieService {
         return movieResponseDtoList;
     }
 
-    public List<TheaterResponseDto> getAllTheatersByMovieName(String name){
+    public List<TheaterResponseDto1> getAllTheatersByMovieName(String name){
+
+        //Get list of movie entities for that particular movie name
         List<MovieEntity> movieEntityList=movieRepository.findAllByMovieName(name);
 
-        List<TheaterResponseDto> theaterResponseDtos=new ArrayList<>();
+        //Getting all the theaters for that movie
+        List<TheaterResponseDto1> theaterResponseDto1s=MovieConvertor.convertListOfMovieEntityToTheaterResponseDto(movieEntityList);
 
-        for(MovieEntity movie:movieEntityList){
-            System.out.println(movie.getMovieName());
-        }
-
-        return theaterResponseDtos;
+        return theaterResponseDto1s;
     }
 
 
